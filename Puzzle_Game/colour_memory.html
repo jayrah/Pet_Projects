@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Colour Memory</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">	
+		<link rel="stylesheet" href="color_memory.css" type="text/css">		
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.1.min.js"></script>
+		<script type="text/javascript" src="color_memory.js"></script>		
+		
+	</head>
+	<body>
+		<section>
+			<!-- PLAYFIELD AREA -->
+			<table id="playField" tabIndex="1">				
+			</table>
+			<!-- MESSAGE BOARD AREA -->
+			<div id="messageBoard">
+				<div class="logo">
+					<img src="images/logo.png" alt="logo">
+					<h1>Test your memory</h1>
+				</div>
+				<div class="scoreBoard">
+					<h3>Your score</h3>					
+					<span class="score">0</span>
+					<div class="scoreImages">
+						<img id="multi" src="images/multi.png" alt="multiplier">
+						<img id="star" src="images/Gold_Star.png" alt="star">
+					</div>
+					<div id="comment">You haven't scored anything yet</div>
+				</div>
+				<div class="restart" tabIndex="2">
+					<img id="restartImg" src="images/restart.png" alt="restart">
+					<h3>Click to Restart</h3>
+				</div>
+			</div>
+		</section>		
+	</body>	
+</html>

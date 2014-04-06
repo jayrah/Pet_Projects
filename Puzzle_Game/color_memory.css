@@ -1,0 +1,118 @@
+body{
+	font-size:100%;
+	color:white;
+	font-family: "Comic Sans MS",cursive,sans-serif;
+}
+section{
+	position:relative;
+	margin:0px auto;			
+	width:1050px;
+}
+#playField{
+	display:block;	
+	border-collapse:collapse;				
+}
+#playField td{
+	padding:0px;
+	border-radius:6px;
+}
+td span{
+	display:block;
+	height:98%;
+	width:98.1%;
+	border: 1px solid gray;
+	border-radius: 6px 6px 6px 6px;
+	-moz-transform-style: preserve-3d;
+	-moz-transition: 0.5s;
+}
+.back{
+	background-image:url(images/card_bg.gif);
+	background-size:100% 100%;
+}
+.front{
+	-moz-transform: rotatey(-180deg);				 
+}
+td span.focussed{
+	border-radius: 8px 8px 8px 8px;
+	box-shadow: 0 0 6px 3px #222;
+	z-index: 999;
+}
+.inactive{
+	background-color:black;
+}
+.restart{
+	background-color: black;
+	border-radius: 14px 14px 14px 14px;
+	bottom: 0;
+	cursor: pointer;    
+	margin-right: 10px;
+	padding-top: 20px;
+	position: absolute;
+	text-align: center;
+	width: 260px;
+}
+.restart img{
+	height:50px;
+	width:50px;
+}
+#messageBoard{
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 260px;
+	height:550px;
+	padding:10px;
+	background-color:transparent;
+}
+.scoreBoard{
+	background-color: black;
+	border-radius: 14px 14px 14px 14px;
+	padding-bottom: 25px;
+	padding-left: 10px;
+	padding-top: 1px;
+}
+.logo{
+	background-color:black;				
+	margin: 20px auto;
+	text-align: center;
+	width: 100%;
+	border-radius:14px;
+	padding-bottom:2px;
+}
+.logo img{
+	height: 100px;
+	width: 250px;
+}
+h1{
+	font-size: 18px;
+	font-weight: bold;
+	position: relative;
+	text-transform: uppercase;
+	color:white;
+}
+.scoreImages{
+	text-align:right;
+	display:none;
+}
+#star{
+	height:90px;
+	width:90px;
+	top:15px;
+	position:relative;
+}
+#multi{
+	height:40px;
+	width:40px;
+}
+.score{
+	font-size:65px;
+	font-weight:bold;
+	margin-right:15px;
+}
+.restart h3{
+	display: block;
+	margin-top: -5px;
+}
+#comment{
+	display:block;
+}

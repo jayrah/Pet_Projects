@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Swirl Matrix</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">			
+		<script src="http://code.jquery.com/jquery-1.8.1.min.js"></script>
+		<style>
+			#matrix{
+				margin: 80px auto;    
+			}
+			#matrix span{
+				border: 1px solid #cccccc;
+				display: inline-block;
+				padding: 0 10px;
+				text-align: center;
+				width: 20px;
+				position:absolute;
+				border-radius:6px;
+			}			
+		</style>
+	</head>
+	<body>
+		<input id="inputSize" placeholder="Enter Matrix Size">
+		<button id="submit">Generate Matrix!</button>
+		<div id="matrix"></div>
+	</body>
+	<script>
+	$(document).ready(function(){
+		$('#inputSize').val('');
+		
+		// Dynamically change direction for the swirl
+		
+		function Next(dir) {
+			if(dir == 3) 
+				return (0);
+			else
+				return(dir+1);
+		}
+	
+		// Fixes an element (1) and builds a swirl around it
+		// Swirl is determined by incrementing values + changing direction
+		
+		function GenerateSwirl(size) {
+			var direction = 0;
+			var inc_gap = 1;
+			var cnt = 0;
+			var dir_cnt = 0;
+			var nextTop=0;
+			var nextLeft = 0;
+			for(var i = 1; i <= size*size; i++) {
+			
+				// Right => The next element should be placed to current element's right
+			
+				if(direction == 0){					
+					$('#matrix').append('<span id="grid-'+i+'" class="right">'+i+'</span>');
+					$('#grid-'+i).css({'top':nextTop,'left':nextLeft});
+					$('#grid-1').css({'top':'250px','left':'500px','position':'absolute'});
+					nextTop = $('#grid-'+i).offset().top;
+					nextLeft = $('#grid-'+i).offset().left + 50;
+				}
+				
+				// Down => The next element should be placed below current element
+				
+				else if (direction == 1){							
+					$('#matrix').append('<span id="grid-'+i+'" class="down">'+i+'</span>');
+					$('#grid-'+i).css({'top':nextTop,'left':nextLeft});
+					nextTop = parseInt($('#grid-'+i).offset().top) + 50;
+					nextLeft = $('#grid-'+i).offset().left;				
+				}
+				
+				// Left => The next element should be placed to the left of current element
+				
+				else if (direction == 2){							
+					$('#matrix').append('<span id="grid-'+i+'"class="left">'+i+'</span>');
+					$('#grid-'+i).css({'top':nextTop,'left':nextLeft});
+					nextTop = $('#grid-'+i).offset().top;
+					nextLeft = parseInt($('#grid-'+i).offset().left) - 50;				
+				}
+				
+				// Up => The next element should be placed above current element
+				
+				else if (direction == 3){							
+					$('#matrix').append('<span id="grid-'+i+'" class="up">'+i+'</span>');
+					$('#grid-'+i).css({'top':nextTop,'left':nextLeft});
+					nextTop = parseInt($('#grid-'+i).offset().top) - 50;
+					nextLeft = $('#grid-'+i).offset().left;				
+				}
+				
+				// Iterate to the next swirl
+				
+				cnt++;
+				if(cnt == inc_gap) {
+					direction = Next(direction);
+					if(dir_cnt == 1) { 
+						inc_gap++;
+						dir_cnt = 0;
+					} else {
+						dir_cnt++;
+					}
+					cnt = 0;
+				}
+			}		
+		}
+		
+		$('#submit').click(function(){
+			var matrix_size = $('#inputSize').val();
+			$('#matrix').empty();
+			GenerateSwirl(matrix_size);
+		});
+	
+	});			
+	</script>
+</html>
