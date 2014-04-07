@@ -5,7 +5,7 @@ $(document).ready(function(){
 	CLOSEST	   = 1, UP = 38, DOWN = 40, RIGHT = 39, LEFT = 37, ENTER = 13;
 	SCORE_MESSAGE = [""];
 	
-	//Variables
+	//Variables	 
 	var debug = false;
 	var grids = BOARD_SIZE*BOARD_SIZE;
 	var game_score =0;		
@@ -57,6 +57,7 @@ $(document).ready(function(){
 	$(document).focus();
 	
 	//Get the colours from config file via Ajax
+	
 	if(debug) {
 		bgColors = ['#3be6c4','#e6e03b','#6f3be6','#4fe63b','#e63b3b','#ff5a00','#ff00de','#3b8fe6']; //Testing use
 		//bgColors = ['#3be6c4','#3be6c4','#3be6c4','#3be6c4','#3be6c4','#3be6c4','#3be6c4','#3be6c4']; //Testing use
