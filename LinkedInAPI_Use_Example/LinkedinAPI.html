@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Linkedin Profile Info</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link href="linkedinInfo.css" rel="stylesheet" type="text/css">	
+		
+		<!-- 1. Include the LinkedIn JavaScript API and define a onLoad callback function -->
+		
+		<script type="text/javascript" src="http://platform.linkedin.com/in.js">
+		  api_key: hu8odttjl337
+		  onLoad: onLinkedInLoad
+		  authorize: true
+		  scope: r_fullprofile r_network
+		</script>
+		<script type="text/javascript">
+		
+		  // 2. Runs when the JavaScript framework is loaded
+		  
+		  function onLinkedInLoad() {
+			IN.Event.on(IN, "auth", onLinkedInAuth);			
+		  }
+		  
+		  // 2. Runs when the viewer has authenticated
+		  
+		  function onLinkedInAuth() {
+			IN.API.Profile('me').fields('id', 'first-name', 'last-name','positions','educations','picture-url','public-profile-url','headline').result(displayProfiles);
+		  }
+		  function onLinkedInLogout() {
+			  setConnections({}, {total:0});
+			}				
+			function showConn(){
+				onLinkedInLogin();
+			}
+			function onLinkedInLogin() {
+			
+			  // Import all the user's direct connections with specific fields
+			  
+			  IN.API.Connections("me")
+				.fields("id", "firstName", "lastName", "pictureUrl", "publicProfileUrl")
+				.result(function(result, metadata) {
+				  setConnections(result.values, metadata);
+				});
+			}
+			
+			//This function displays the retrieved connections in a grid system
+			
+			function setConnections(connections) {
+			  var connHTML = "<ul class='connPics'>";
+			  for (id in connections) {
+				connHTML = connHTML + "<li><a href=\"" + connections[id].publicProfileURL + "\">";				
+				if (connections[id].hasOwnProperty('pictureUrl')) {
+				  connHTML = connHTML + "<img align=\"baseline\" src=\"" + connections[id].pictureUrl + "\"></a>";
+				}  else {
+				  connHTML = connHTML + "<img align=\"baseline\" src=\"http://static02.linkedin.com/scds/common/u/img/icon/icon_no_photo_80x80.png\"></a>";
+				}				
+				connHTML = connHTML + "&nbsp;<a href=\"" + connections[id].publicProfileUrl + "\">";
+				connHTML = connHTML +"<br>"+ connections[id].firstName + " " + connections[id].lastName + "</a></li>";				
+			  }
+			  connHTML = connHTML + "</ul>";			  
+			  document.getElementById("connectionsdata").innerHTML = connHTML;
+			}
+			
+		  // Below function displays user's profile information in the main page
+		  
+		  function displayProfiles(profiles) {
+			 member = profiles.values[0];
+			 document.getElementById("fNameVal").innerHTML=member.firstName;
+			 document.getElementById("lNameVal").innerHTML=member.lastName;
+			 document.getElementById("headline").innerHTML = member.headline;
+			document.getElementById("linkedinProfilePic").src= member.pictureUrl;
+			
+			//Experience details
+			
+			var positionHTML="";
+			var jobPositions = member.positions;
+			var jobPositionCount = jobPositions._total;
+			var educationDetails = member.educations;
+			var educationCount = educationDetails._total;
+			var eduHTML="";			
+			for(var i=0;i<jobPositionCount;i++){
+				var companyDetails = jobPositions.values[i].company;
+				var title = jobPositions.values[i].title;				
+				var duration;
+				if(jobPositions.values[i].isCurrent==true)
+					duration= "Current"; 
+				else
+					duration = jobPositions.values[i].startDate.year+" - "+jobPositions.values[i].endDate.year;						
+				positionHTML+= "<ul><li><span class='compName'>"+companyDetails.name+"</span><br><span class='industry'>("+companyDetails.industry+")</span></li><li><span class='designation'>"+title+"</span></li><li><span class='duration'>"+duration+"</span></li></ul>";				
+			}			
+			document.getElementsByClassName("company")[0].innerHTML = positionHTML;
+			
+			//Education details	
+			
+			for(var i=0;i<educationCount;i++){
+				var schoolName = educationDetails.values[i].schoolName;
+				var degree = educationDetails.values[i].degree;
+				var fieldOfStudy = educationDetails.values[i].fieldOfStudy;				
+				var duration;
+				if(educationDetails.values[i].endDate==null)
+					duration= "Current"; 
+				else
+					duration = educationDetails.values[i].startDate.year+" - "+educationDetails.values[i].endDate.year;			
+				
+				eduHTML+= "<ul><li><span class='schoolName'>"+schoolName+"</span></li><li><span class='degree'>"+degree+"</span> - <span class='fieldOfStudy'>"+fieldOfStudy+"</span></li><li><span class='duration'>"+duration+"</span></li></ul>";				
+			}	
+			document.getElementsByClassName("education")[0].innerHTML = eduHTML;			
+		}
+		</script>		
+	</head>
+	<body>		
+		<header>
+			<h2>Javascript API to load LinkedIn Profile Information into Web-page!</h2>
+			<script type="IN/Login"></script>
+		</header>
+		<section>
+			<div id="profileHead">
+				<figure>
+				<img src="" name="profilePic" id="linkedinProfilePic"></img>
+			</figure>
+			<div class="primaryInfo">			
+				<ul>
+					<li><span id="fNameVal"></span>&nbsp;<span id="lNameVal"></span><br><br></li>					
+					<li><span id="headline"></span></li>
+				</ul>
+			</div>
+			</div>		
+			<h3>Experience</h3>
+			<div class="company">				
+			</div>			
+			<h3>Education</h3>
+			<div class="education">				
+			</div>		
+			<a href="#" id="viewConnections" onClick="showConn()">Click here to view connections</a><br><br>			
+			<div id="connectionsdata"></div>			
+		</section>
+	</body>
+</html>

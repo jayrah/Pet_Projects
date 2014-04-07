@@ -1,0 +1,87 @@
+body{
+background-color:#F2F2F2;
+margin:0px;
+}
+header{
+position:absolute;
+top:0px;
+padding-top:7px;
+height:83px;
+border:solid 1px #888;
+border-bottom:#888;				
+background-color:#cde4d3;				
+font:400 18px 'Century Gothic', sans-serif;font-variant:small-caps;
+width:100%;
+}
+header h2{text-align:center;}
+section{
+width:850px;
+border:solid 1px #888;
+border-radius:5px;
+position:relative;
+top:100px;
+background-color:white;
+box-shadow:0px 0px 4px 1px #888;
+margin:0px auto;
+padding:20px 40px;
+}
+ul{list-style:none;padding:0px;}
+.duration{float:right;font-size:80%;color:#787878;margin-right:10px;}
+ul.connPics li{display:inline-block;width:210px;height:170px;margin:5px;text-align:center;}
+ul.connPics li img{border-radius:5px;border:solid 1px #B0B0B0;}
+.connPics a{text-decoration:none;color:#585858;}
+.connPics{
+margin:0px auto;
+position:relative;
+border:solid 1px #B0B0B0;
+border-radius:8px;
+background-color:#EAFBFB;
+width:680px;
+padding:20px;
+}
+figure{
+position:absolute;
+margin:20px 0px 0px; 
+height:90px;
+width:90px;
+}
+figure img{
+height:100%;
+width:100%;
+border:solid 1px #888;
+border-radius:5px;
+-webkit-transition-duration: 0.5s;
+}
+figure img:hover{
+-webkit-transform:scale(1.8);
+box-shadow:0px 0px 30px gray;	
+z-index:9;				
+}
+.primaryInfo{
+position:relative;
+top:0px;
+left:130px;
+width:670px;
+}
+#fNameVal,#lNameVal{				
+font:bold 30px 'Century Gothic', sans-serif;color:#276363;
+}
+#headline{font:25px 'Century Gothic', sans-serif;}
+body{font:100% 'Century Gothic', sans-serif;}
+section>h3{font-size:24px;width:60px;}
+#profileHead{
+position:relative;
+height:130px;
+background-color:#cde4d3;
+padding:10px 20px;
+border-radius:5px;
+box-shadow:0px 0px 5px 1px #888;
+}
+.compName,.schoolName{
+font-size:20px;
+color:#388E8E;
+font-weight:bold;
+line-height:1.5em;
+}
+.industry{font-size:90%;}
+.designation{line-height:1.5em;font-weight:600;}
